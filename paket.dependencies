@@ -1,0 +1,10 @@
+source https://api.nuget.org/v3/index.json
+
+nuget FSharp.TypeProviders.StarterPack
+nuget FSharp.Core = 4.1.17
+
+group Build
+  source https://api.nuget.org/v3/index.json
+
+  nuget FAKE
+
