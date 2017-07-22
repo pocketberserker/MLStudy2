@@ -87,11 +87,11 @@ let monadPath = __SOURCE_DIRECTORY__ + @"\Monad.txt"
 
 open MLStudy2.TypeProviders
 
-type MonadAria = AriaProvider<monadPath>
+type MonadAriaBuilder2 = AriaProvider<monadPath>
 
-let 詠唱2 = MonadAria.Builder()
+let 詠唱2 = MonadAriaBuilder2()
 
-type MonadAria.Builder with
+type MonadAriaBuilder2 with
   [<CustomOperation("quick")>]
   member __.ExtraLine(()) =
     printName MonadAria.Line6 (async { return () })
@@ -111,8 +111,25 @@ let example3 () = 詠唱2 {
 [<EntryPoint>]
 let main _ =
 
-  example1 ()
-  example2 ()
+  let f (x, y) =
+    printfn "%A" x
+    printfn "%A" y
+
+  let a = typeof<MonadAriaBuilder>.GetMethods()
+  typeof<MonadAriaBuilder2>.GetMethods()
+  |> Array.choose (fun x ->
+    let a1 = x.GetCustomAttribute<CustomOperationAttribute>()
+    a |> Array.tryFind (fun y ->
+      let a2 = y.GetCustomAttribute<CustomOperationAttribute>()
+      if isNull (box a1) || isNull (box a2) then false
+      else a1.Name = a2.Name
+    )
+    |> Option.map (fun y -> (y, x))
+  )
+  |> Array.iter (f)
+
+  //example1 ()
+  //example2 ()
   //example3 ()
 
   0
