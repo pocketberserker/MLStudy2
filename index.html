@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>呪文詠唱！ F#</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# 呪文詠唱！ FSharp
+
+ML勉強会 # 2
+
+@pocketberserker
+
+---
+
+# 自己紹介
+
+![icon](https://camo.githubusercontent.com/5dbd18d5fc15054677aaab64d647c4a076483af4/68747470733a2f2f646c2e64726f70626f7875736572636f6e74656e742e636f6d2f752f35373437383735382f7062736b2e6a7067)
+
+* なかやん・ゆーき / ぺんぎん / もみあげ
+* [@pocketberserker](https://twitter.com/pocketberserker)
+* Microsoft MVP for <del>F#</del> Visual Studio and Development Technologies (2015/04/01～ 2017/03/31)
+* 最近PFDSをOCamlで写経している
+* Monad Buster?
+
+---
+
+# 発表開始の前に
+
+* 実用的な話はありません
+
+---
+
+# FSharpとは
+
+* ML族らしい？
+  * `let`とか`let rec`とかなのでまだそれっぽいかもしれない
+* でも最近OCaml書いてたら「F# はML族ではないのでは…」みたいな気持ちに
+
+---
+
+# 問題です
+
+---
+
+# このコードは通ると思いますか？
+
+```fsharp
+詠唱 {
+    モナドは
+    単なる
+    自己関手の
+    圏における
+    モノイド対象だよ
+    何か問題でも
+    ``?``
+}
+```
+
+---
+
+# 答え
+
+適切に型とコンピュテーション式用のBuilderを定義すれば通る
+
+---
+
+# 実装
+
+https://github.com/pocketberserker/MLStudy2/blob/439c71671d7d5dca24d77aaf18b55595e35f2e0c/src/MLStudy2/Program.fs#L25
+
+---
+
+# 使っているもの
+
+* コンピュテーション式
+  * カスタムオペレーター
+  * Monad用じゃないコンピュテーション式も定義できる
+* 型
+* .NETの小技?
+
+---
+
+# このコンピュテーション式のここがすごい！
+
+* 1つでも抜ければコンパイルエラー
+* 順番が違っていてもコンパイルエラー
+* 実用性皆無!
+
+---
+
+# なぜコンパイルエラーになるのか
+
+* コンピュテーション式はBuilderのメソッド呼び出しに展開される
+  * 規則は仕様書見て
+* 引数と戻り値の型を固定しておく
+  * https://github.com/pocketberserker/MLStudy2/blob/439c71671d7d5dca24d77aaf18b55595e35f2e0c/src/MLStudy2/Program.fs#L5
+* コンパイルが通るオペレーターが1つに定まる
+
+---
+
+# 問題点
+
+手作業で定義がつらい
+
+---
+
+# 改善案1
+
+コードジェネレータ（.NETならT4）
+
+* だがこれは使ったら負けでしょう？
+
+---
+
+# 改善案2
+
+TypeProvider
+
+* メタデータから型を生成
+* キーワードリストのファイルがあれば生成できそう
+
+---
+
+# 残念なお知らせ
+
+間に合いませんでしたorz
+
+---
+
+# 間に合わなかった理由
+
+* TypeProviderは実装難易度が高い
+  * ASTみたいなのでひたすらコードをかかないといけない
+  * コンパイルエラーの情報が貧弱な時がある
+
+---
+
+# というわけで
+
+できあがったら後日ブログに記事書くので許して
+
+---
+
+# まとめ
+
+* F#にはF#なりの<del>遊び道具</del>良い仕組みがある
+  * コンピュテーション式
+  * TypeProvider
+* MLとは何だったのか
+
+    </textarea>
+    <script src="remark-0.14.1.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
