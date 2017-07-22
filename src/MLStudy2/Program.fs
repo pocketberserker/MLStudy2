@@ -82,10 +82,37 @@ type MonadAriaBuilder with
 
 let example2 () = 詠唱 { () }
 
+[<Literal>]
+let monadPath = __SOURCE_DIRECTORY__ + @"\Monad.txt"
+
+open MLStudy2.TypeProviders
+
+type MonadAria = AriaProvider<monadPath>
+
+let 詠唱2 = MonadAria.Builder()
+
+type MonadAria.Builder with
+  [<CustomOperation("quick")>]
+  member __.ExtraLine(()) =
+    printName MonadAria.Line6 (async { return () })
+
+// TypeProviderで生成した場合はカスタムオペレーターと認識されない…？
+let example3 () = 詠唱2 {
+  quick
+  //モナドは
+  //単なる
+  //自己関手の
+  //圏における
+  //モノイド対象だよ
+  //何か問題でも
+  //``?``
+}
+
 [<EntryPoint>]
 let main _ =
 
   example1 ()
   example2 ()
+  //example3 ()
 
   0

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MLStudy2", "src\MLStudy2\MLStudy2.fsproj", "{A08E2390-A2EE-476F-8AE8-B7826D95EFDA}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MLStudy2.TypeProviders", "src\MLStudy2.TypeProviders\MLStudy2.TypeProviders.fsproj", "{83AC382C-7244-4C9A-8908-63D26CE97893}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A08E2390-A2EE-476F-8AE8-B7826D95EFDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A08E2390-A2EE-476F-8AE8-B7826D95EFDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A08E2390-A2EE-476F-8AE8-B7826D95EFDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83AC382C-7244-4C9A-8908-63D26CE97893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83AC382C-7244-4C9A-8908-63D26CE97893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83AC382C-7244-4C9A-8908-63D26CE97893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83AC382C-7244-4C9A-8908-63D26CE97893}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
